@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script
+	  src="https://code.jquery.com/jquery-3.2.1.min.js"
+	  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+	  crossorigin="anonymous">
+	</script>
+    </head>
+    <body>
+        <form method="post" action="/api/testPost?userName=vicki&password=123">
+            Name: <input type="text" name="userName" id="userName"/><br>
+            Password: <input type="password" name="password" id="password"/><br>
+            <input type="button" name="OkButton" value="OK"/ id="button">
+            <div id="debug">...</div>
+        </form>
+        <script>
+            $(document).ready(function(){
+            	$('#button').click(function(e){
+            		// e.preventDefault();
+            		// e.stopPropagation();
+            		$.ajax({
+				       url:'/api/testPost',
+				       type:'POST',
+				       contentType: "application/json;charset=UTF-8",
+				       dataType: "json",
+				       data:JSON.stringify({
+				       	"user_name" : "$('#userName').val()",
+				        "user_password" : "$('#password').val()" 
+				       }),
+				       
+				       error: function(){
+				           alert('ajax request 有錯誤');
+				       },
+				       
+				       success: function(data){
+				           console.log(JSON.stringify(data));
+				       }
+			       
+			       
+			    });
+            	})
+			    
+		});
+        </script>
+    </body>
+</html>
