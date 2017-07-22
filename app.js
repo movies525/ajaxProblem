@@ -64,6 +64,7 @@ app.get('/:controllerName/:actionName',function(request,response){
 
     //  response.send('userName:' + request.body.userName +',password:'+ request.body.password);
 app.post('/api/testPost',function(request,response){
+    console.log(request.body);
         
     connection.query('select * from member where UserName =?', [request.body.userName],function(error,rows,field){
         if(!!error){
@@ -74,8 +75,13 @@ app.post('/api/testPost',function(request,response){
                 console.log("no find");
             } else{
                 console.log(rows);
+                
+                if(rows[0].Password == request.body.password){
+                    console.log("password right");
+                }
                 response.send(JSON.stringify(rows));
             }
+            
         }
     });
     

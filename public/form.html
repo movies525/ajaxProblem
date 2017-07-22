@@ -11,22 +11,23 @@
         <form method="post" action="/api/testPost?userName=vicki&password=123">
             Name: <input type="text" name="userName" id="userName"/><br>
             Password: <input type="password" name="password" id="password"/><br>
-            <input type="button" name="OkButton" value="OK"/ id="button">
+            <input type="button" name="OkButton" value="OK" id="OkButton">
             <div id="debug">...</div>
         </form>
         <script>
             $(document).ready(function(){
-            	$('#button').click(function(e){
+            	$('#OkButton').click(function(e){
             		// e.preventDefault();
             		// e.stopPropagation();
+            		console.log("ajax start");
             		$.ajax({
 				       url:'/api/testPost',
 				       type:'POST',
 				       contentType: "application/json;charset=UTF-8",
 				       dataType: "json",
 				       data:JSON.stringify({
-				       	"user_name" : "$('#userName').val()",
-				        "user_password" : "$('#password').val()" 
+				       	userName : $('#userName').val(),
+				        password : $('#password').val() 
 				       }),
 				       
 				       error: function(){
